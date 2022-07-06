@@ -1,0 +1,22 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Port property configuration
+          dellemc.sfs.sfs_port_properties:
+            name: "ethernet1/1/8"
+            target_port: "OS10SIM:ethernet1/1/8"
+            description: "Interface_8"
+            node_id: "OS10SIM"
+            admin_status: "Enabled"
+            mtu: 9216
+            auto_neg: "Enabled"
+            configured_speed: 0
+            state: 'present'
+          register: result
+
+    - name: Debug the result
+      debug: var=result

@@ -1,0 +1,18 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Node Policy Mapping
+          dellemc.sfs.sfs_node_policy_mapping:
+            node: 19HQXC2
+            policy_list:
+              - policybgp100
+              - policybgp101
+            state: "present"
+          register: result
+
+    - name: Debug the result
+      debug: var=result

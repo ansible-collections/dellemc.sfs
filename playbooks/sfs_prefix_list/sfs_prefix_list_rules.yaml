@@ -1,0 +1,24 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Prefix List Rules
+          dellemc.sfs.sfs_prefix_list_rules:
+            name: "uplink-prefix"
+            seq_no: 100 
+            ip_address: "10.11.0.33"
+            ip_address_prefixLen: 16
+            comparator: "le-only"
+            value1: 24
+            packet_handling: "deny"
+            destination_prefix: "172.16.0.68"
+            destination_prefixLen: 16
+            state: 'present'
+          register: result
+      
+          
+    - name: Debug the result
+      debug: var=result

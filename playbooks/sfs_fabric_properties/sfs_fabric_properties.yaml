@@ -1,0 +1,29 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Fabric properties
+          dellemc.sfs.sfs_fabric_properties:
+            leaf_asn: 65012
+            spine_asn: 65013
+            private_subnet_prefix: "172.16.0.0"
+            private_prefix_len: 16
+            global_subnet_prefix: "172.30.0.0"
+            global_prefix_len: 16
+            client_control_vlan: 3939
+            client_management_vlan: 4091
+            Stp_mode: "mst"
+            designated_leader_backOff_timer: 3
+            designated_leader_nodes: [ ]
+            description: "SFS L3 Fabric Global Configurations"
+            domain_id: 100
+            mdns_publish: "disable"
+            state: 'present'
+          register: result
+      
+          
+    - name: Debug the result
+      debug: var=result

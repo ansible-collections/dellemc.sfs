@@ -1,0 +1,17 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+         - name: SFS Backup
+           dellemc.sfs.sfs_backup:
+               file_name: '/home/administrator/backup.json'
+           register: result
+         - name: SFS Restore
+           dellemc.sfs.sfs_restore:
+               file_name: '/home/administrator/backup.json'
+           register: result
+    - name: Debug the result
+      debug: var=result

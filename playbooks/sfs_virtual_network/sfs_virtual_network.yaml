@@ -1,0 +1,29 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Virtual Network
+          dellemc.sfs.sfs_virtual_network:
+            virtual_network_name: "vnet604"
+            virtual_network_description: "vnet604 Create"
+            virtual_network_type: "VXLAN"
+            vxlanvni: 1604
+            vltvlanid: 604
+            gateway_ip_address: "172.17.105.1"
+            gateway_mac_address: "00:11:12:01:23:36"
+            prefix_length: 24
+            address_family: "inet"
+            tenant_name: "tenant2"
+            ip_address_list:
+              - "172.17.105.2"
+              - "172.17.105.3"
+              - "172.17.105.4"
+            helper_address: ["10.10.10.10", "11.11.11.11", "12.12.12.12"]
+            state: present
+          register: result
+
+    - name: Debug the result
+      debug: var=result

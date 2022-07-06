@@ -1,0 +1,18 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Fabric update
+          dellemc.sfs.sfs_fabric_update:
+            name: "Some New Fabric"
+            description: "This is a new Fabric"
+            fabric_id: "f926a2fa-124e-4558-ba11-49127426010c"
+            state: 'present'
+          register: result
+
+
+    - name: Debug the result
+      debug: var=result

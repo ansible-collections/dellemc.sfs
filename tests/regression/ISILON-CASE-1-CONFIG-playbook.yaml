@@ -1,0 +1,197 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+         - name: Create L3 Fabric with VLTi(VxRail)
+           dellemc.sfs.sfs_setup:
+             service_enable: true
+             icl_ports:
+               - ethernet1/1/5
+               - ethernet1/1/6
+             domain_id: 103
+             role: LEAF
+             state: 'present'
+           register: result
+
+         - name: Pause for 8 minutes to reboot device
+           pause:
+             minutes: 8
+
+
+         - name: Fabric properties
+           dellemc.sfs.sfs_fabric_properties:
+             leaf_asn: 65012
+             spine_asn: 65013
+             private_subnet_prefix: "172.16.0.0"
+             private_prefix_len: 16
+             global_subnet_prefix: "172.30.0.0"
+             global_prefix_len: 16
+             client_control_vlan: 3939
+             client_management_vlan: 4091
+             Stp_mode: "mst"
+             designated_leader_backOff_timer: 3
+             designated_leader_nodes: [ ]
+             description: "SFS L3 Fabric Global Configurations"
+             domain_id: 100
+             mdns_publish: "disable"
+             state: 'present'
+           register: result
+
+         - name: Pause for 10 minutes to reboot device
+           pause:
+             minutes: 10
+
+
+         - name: Fabric Replace Nodes
+           dellemc.sfs.sfs_fabric_replace:
+             old_service_tag: "HMXBPK2"
+             fabric_id: "66e7c2b7-78b7-4be2-ab3c-36fababee4d9"
+             new_service_tag: "97JBJ23"
+             state: 'present'
+           register: result
+
+         - name: Pause for 10 minutes to reboot device
+           pause:
+             minutes: 10
+  
+
+         - name: Nodes Handler
+           dellemc.sfs.sfs_nodes:
+             action:  "unblink"        # ['nodehandler', 'blink', 'unblink', 'reboot', 'rollback', 'factorydefault']
+             node_id: "VB9D06E"
+             state: 'present'
+           register: result
+  
+         - name: Pause for 10 minutes to reboot device
+           pause:
+             minutes: 10
+
+
+         - name: Set/Reset Preferred Master
+           dellemc.sfs.sfs_preferred_master:
+             node_id: "VB90DD3"
+             preferred_master: "True"
+             state: 'present'
+           register: result
+
+
+         - name: sfs_network
+           dellemc.sfs.sfs_network:
+             network_name: "sfs_network"
+             network_id: "Leaf-test-GeneralPurpose"
+             vlan_min: 752
+             vlan_max: 752
+             qos_priority: "Platinum"
+             network_type: "GeneralPurpose"
+             network_description: "SFS Network Create Test From Ansible-ddddd"
+             state: "present"
+           register: result
+
+         - name: Pause for 5 minutes to reboot device
+           pause:
+             minutes: 5
+
+
+         - name: Update uplink
+           dellemc.sfs.sfs_uplink:
+             uplink_id: 1
+             node: 97JBJ23
+             uplink_name: New Uplink
+             uplink_description: New Uplink description 2
+             configuration_interfaces:
+               - 97JBJ23:ethernet1/1/41
+               - 97K5J23:ethernet1/1/41
+             tagged_networks:
+               - VLAN1200
+             untagged_network: VLAN 1
+             uplink_type: "Normal"
+             lag_type: "None"
+             native_vlan: 100
+             ingress_ipacl: "UplinkIngressIpACL"
+             state: "present"
+           register: result
+         
+         - name: Pause for 5 minutes to reboot device
+           pause:
+             minutes: 5 
+
+
+         - name: Virtual Network
+           dellemc.sfs.sfs_virtual_network:
+             virtual_network_name: "vnet604"
+             virtual_network_description: "vnet604 Create"
+             virtual_network_type: "VXLAN"
+             vxlanvni: 1604
+             vltvlanid: 604
+             gateway_ip_address: "172.17.105.1"
+             gateway_mac_address: "00:11:12:01:23:36"
+             prefix_length: 24
+             address_family: "inet"
+             ip_address_list:
+               - "172.17.105.2"
+               - "172.17.105.3"
+               - "172.17.105.4"
+             helper_address: ["10.10.10.10", "11.11.11.11", "12.12.12.12"]
+             state: present
+           register: result
+
+
+         - name: Server Profiles
+           dellemc.sfs.sfs_server_profile:
+             server_id: SERVER
+             bonding_technology: LACP
+             state: 'present'
+           register: result
+
+
+         - name: Server Interface Profiles
+           dellemc.sfs.sfs_server_interface_profile:
+             server_id: SERVER
+             interface_id: "NIC11"
+             native_vlan: 1012
+             nic_bonded: True
+             staticOnboard_interface: "OS10SIM:ethernet1/1/16"
+             networks: [{ "NetworkId": "NETWORK1"}, { "NetworkId": "NETWORK2"}]
+             bandwidth_partition: [ {"PercentageBandwidth": 85, "TrafficType": "iSCSI" }, {"PercentageBandwidth": 15, "TrafficType": "FC" } ]
+             untagged_network: {"NetworkId": "Network3"}
+             state: 'present'
+           register: result
+
+
+         - name: Port breakout configuration
+           dellemc.sfs.sfs_port_breakout:
+             target_port: "VB9D06E:phy-port1/1/27"
+             fanout_profile: "4X10GE"
+             name: "interface_27"
+             description: "Description for Interface22"
+             state: 'present'
+           register: result
+  
+
+         - name: Port property configuration
+           dellemc.sfs.sfs_port_properties:
+             name: "ethernet1/1/8"
+             target_port: "OS10SIM:ethernet1/1/8"
+             description: "Interface_8"
+             node_id: "OS10SIM"
+             admin_status: "Enabled"
+             mtu: 9216
+             auto_neg: "Enabled"
+             configured_speed: 0
+             state: 'present'
+           register: result
+
+         - name: Pause for 5 minutes to reboot device
+           pause:
+             minutes: 5
+
+
+         - name: Validation Errors
+           dellemc.sfs.sfs_validation_errors:
+           register: result
+
+    - name: Debug the result
+      debug: var=result

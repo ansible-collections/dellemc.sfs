@@ -1,0 +1,46 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Route Policy
+          dellemc.sfs.sfs_route_policy:
+            policy_id: "policybgp100"
+            policy_name: "policybgp100"
+            policy_description: "description"
+            address_family_type: "ipv4"
+            remote_address: "100.100.100.22"
+            remote_loopback_address: "100.100.100.2"
+            remote_as: 65004
+            policy_type: RoutePolicyEbgp
+            sender_side_loop_detection: 1
+            route_filter_enable: 0
+            ebgpMulti_hop_count: 2
+            bfd_neighbor_enable: 1
+            advertise_VTEPs: 1
+            interconnect_routePolicy: 1
+            state: present
+          register: result
+            
+        - name: Route Maps
+          dellemc.sfs.sfs_route_maps:
+            map_id: "route-map-1"
+            state: present
+          register: result
+
+
+        - name: Route Maps Rules
+          dellemc.sfs.sfs_route_maps_rules:
+            map_id: "route-map-1"
+            seq_no: 10
+            match_ipv4_route_prefixList: "v4-prefix-1"
+            match_ipv4_aclList: "acl-match-1"
+            packet_handling: "Permit"
+            action_ipv4_next_hoplist: [{ IpV4Address: "2.2.2.2", Vrf: "default"}]
+            state: absent
+          register: result
+
+    - name: Debug the result
+      debug: var=result

@@ -1,0 +1,16 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: set password
+          dellemc.sfs.sfs_rest:
+            new: "test6"
+            state: 'present'
+          register: result
+      
+          
+    - name: Debug the result
+      debug: var=result
