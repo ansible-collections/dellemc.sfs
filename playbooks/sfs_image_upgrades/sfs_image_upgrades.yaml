@@ -1,0 +1,18 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+         - name: SFS image Upgrade
+           dellemc.sfs.sfs_image_upgrades:
+               image_url: 'scp://userid:passwd@hostip/filepath'
+               image_type: 'OS10-BINARY'
+               reboot_strategy: 'PARALLEL'
+               protocol: 'HTTP'
+               download_parallel: 'True'
+           register: result
+
+    - name: Debug the result
+      debug: var=result

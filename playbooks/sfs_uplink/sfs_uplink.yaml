@@ -1,0 +1,28 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Update uplink
+          dellemc.sfs.sfs_uplink:
+            uplink_id: 1
+            node: 97JBJ23
+            uplink_name: New Uplink
+            uplink_description: New Uplink description 2
+            configuration_interfaces:
+              - 97JBJ23:ethernet1/1/41
+              - 97K5J23:ethernet1/1/41
+            tagged_networks:
+              - VLAN1200
+            untagged_network: VLAN 1
+            uplink_type: "Normal"
+            lag_type: "None"
+            native_vlan: 100
+            ingress_ipacl: "UplinkIngressIpACL"
+            state: "present"
+          register: result
+
+    - name: Debug the result
+      debug: var=result

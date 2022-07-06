@@ -1,0 +1,18 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Fabric Replace Nodes
+          dellemc.sfs.sfs_fabric_replace:
+            old_service_tag: "HMXBPK2"
+            fabric_id: "66e7c2b7-78b7-4be2-ab3c-36fababee4d9"
+            new_service_tag: "97JBJ23"
+            state: 'present'
+          register: result
+      
+          
+    - name: Debug the result
+      debug: var=result

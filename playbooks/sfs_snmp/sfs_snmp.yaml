@@ -1,0 +1,19 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: SNMP Server
+          dellemc.sfs.sfs_snmp:
+            host_ipaddress: "192.168.5.3"
+            address_family: "inet"
+            snmp_version: "v3"
+            community: "v3community"
+            snmp_securitylevel: "noauth"
+            state: 'present'
+          register: result
+
+    - name: Debug the result
+      debug: var=result

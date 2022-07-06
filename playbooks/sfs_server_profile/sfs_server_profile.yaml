@@ -1,0 +1,31 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Server Profiles
+          dellemc.sfs.sfs_server_profile:
+            server_id: SERVER
+            bonding_technology: LACP
+            state: 'present'
+          register: result
+
+
+        - name: Server Interface Profiles
+          dellemc.sfs.sfs_server_interface_profile:
+            server_id: SERVER
+            interface_id: "NIC11"
+            native_vlan: 1012
+            nic_bonded: True
+            staticOnboard_interface: "OS10SIM:ethernet1/1/16"
+            networks: [{ "NetworkId": "NETWORK1"}, { "NetworkId": "NETWORK2"}]
+            bandwidth_partition: [ {"PercentageBandwidth": 85, "TrafficType": "iSCSI" }, {"PercentageBandwidth": 15, "TrafficType": "FC" } ]
+            untagged_network: {"NetworkId": "Network3"}
+            state: 'present'
+          register: result
+
+
+    - register: result
+      debug: var=result

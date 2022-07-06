@@ -1,0 +1,22 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Fabric handler
+          dellemc.sfs.sfs_fabric_handler:
+            fabric_design: "2xMX9116n_Fabric_Switching_Engines_in_same_chassis"
+            fabric_design_mappings: [{ "DesignNode": "Switch-A", "PhysicalNode": "HMXBPK2"},
+                 { "DesignNode": "Switch-B", "PhysicalNode": "97JBJ23"}]
+            name:  "Some New Fabric"
+            description: "This is a new Fabric"
+            nodes: [{ "NodeId": "HMXBPK2"}, { "NodeId": "97JBJ23"}]
+            fabric_id: "f926a2fa-124e-4558-ba11-49127426010c"
+            state: 'present'
+          register: result
+
+
+    - name: Debug the result
+      debug: var=result

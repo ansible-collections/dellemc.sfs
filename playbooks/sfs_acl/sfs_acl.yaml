@@ -1,0 +1,21 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: ACL configurations
+          dellemc.sfs.sfs_acl:
+            name: "uplink-acl"
+            description_string: "uplinkAclDescription"
+            state: 'present'
+          register: result
+
+        - name: Apply Acl on interface
+          dellemc.sfs.sfs_acl_mapping:
+            interface: [{"name":"ethernet1/1/14:1", "dell-policy:policy-acl-config":{"access-group":[{"role":"ipv4", "direction":"in", "vrf":"0", "name":"uplink-acl"}]}}]
+          register: result  
+
+    - name: Debug the result
+      debug: var=result

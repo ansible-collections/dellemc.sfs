@@ -1,0 +1,15 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: SFS_NTP
+          dellemc.sfs.sfs_ntp:
+            server_id: "1.1.1.1"
+            state: 'present'
+          register: result
+
+    - name: Debug the result
+      debug: var=result

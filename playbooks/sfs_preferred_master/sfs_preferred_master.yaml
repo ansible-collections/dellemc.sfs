@@ -1,0 +1,16 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Set/Reset Preferred Master
+          dellemc.sfs.sfs_preferred_master:
+            node_id: "VB90DD3"
+            preferred_master: "False"
+            state: 'present'
+          register: result
+
+    - name: Debug the result
+      debug: var=result

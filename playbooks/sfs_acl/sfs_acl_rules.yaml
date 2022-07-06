@@ -1,0 +1,30 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: ACLRules configurations
+          dellemc.sfs.sfs_acl_rules:
+            name: "uplink-acl"
+            seq_no: 9
+            destination_prefix: "10.10.0.33"
+            destination_mask: "255.255.255.255"
+            source_prefix: "10.1.1.1"
+            source_mask: "255.255.255.255"
+            destination_any: false
+            source_any: true
+            ip_protocol: 4
+            source_port_range_comparator_port: 200
+            destination_port_range_comparator_port: 8000
+            source_port_range_comparator: "ge"
+            dest_port_range_comparator: "eq"
+            packet_handling: "deny"
+            remark: "ipacl9remark" ## Remark must be configured without any other additional attributes other than SeqNo. ##
+            state: 'present'
+          register: result
+      
+          
+    - name: Debug the result
+      debug: var=result

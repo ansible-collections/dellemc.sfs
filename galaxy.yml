@@ -1,0 +1,16 @@
+authors:
+- Gunasekaran Tamilarasan <gunasekaran_tamilara@dell.com>
+- Ranjith.S <Ranjith_Senkesula@Dellteam.com>
+- Kalaivani Baskaran <kalaivanibaskaran.ba@dell.com>
+dependencies:
+  ansible.netcommon: '>=1.0.0'
+description: Ansible Network Collection for Dell EMC SmartFabric solutions
+license_file: LICENSE
+name: sfs
+namespace: dellemc
+readme: README.md
+tags: [dell, dellemc, emc, networking, sfs]
+version: 1.0.0
+repository: https://github.com/ansible-collections/dellemc.sfs
+homepage: https://github.com/ansible-collections/dellemc.sfs
+issues: https://github.com/ansible-collections/dellemc.sfs/issues

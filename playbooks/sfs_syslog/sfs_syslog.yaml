@@ -1,0 +1,16 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: Set/Reset syslog
+          dellemc.sfs.sfs_syslog:
+            log_level: "log-emerg"
+            server_id: "3.3.3.3"
+            state: 'present'
+          register: result
+
+    - name: Debug the result
+      debug: var=result

@@ -1,0 +1,15 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+        - name: aaa_authentication_method configurations
+          dellemc.sfs.sfs_aaa:
+            method_list: ["local", "radius", "tacacs"]
+            state: 'present'
+          register: result
+
+    - name: Debug the result
+      debug: var=result

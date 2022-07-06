@@ -1,0 +1,40 @@
+- hosts: all
+  gather_facts: false
+  collections:
+    - dellemc.sfs
+  tasks:
+    - name: Provision Configs
+      block:
+         - name: Disable L3 Fabric
+           dellemc.sfs.sfs_setup:
+             service_enable: false
+             state: 'present'
+           register: result
+
+         - name: Create L3 Fabric with VLTi(VxRail)
+           dellemc.sfs.sfs_setup:
+             service_enable: true
+             icl_ports:
+               - ethernet1/1/5
+               - ethernet1/1/6
+             role: LEAF
+             state: 'present'
+           register: result
+
+         - name: Create L3 Fabric without VLTi(Isilon)
+           dellemc.sfs.sfs_setup:
+             service_enable: true
+             role: LEAF
+             state: 'present'
+           register: result
+
+         - name: Create L3 Fabric node as Spine
+           dellemc.sfs.sfs_setup:
+             service_enable: true
+             role: SPINE
+             state: 'present'
+           register: result
+
+
+    - name: Debug the result
+      debug: var=result
