@@ -35,8 +35,7 @@ DOCUMENTATION = """
 module: configure_node_policy_mapping
 short_description: Configure SFS node policy-mapping on Dell SmartFabric Services.
 description:
-  - This module is used to manage SFS node-policy-mapping configuration. It supports CREATE and DELETE operations.
-Route policy must be created using the sfs-route-policy before the policy mapping is invoked.
+  - This module is used to manage SFS node-policy-mapping configuration, Route policy must be created using the sfs-route-policy before the policy mapping is invoked.
 author: Ranjith Sunkesula <Ranjith_Senkesula@Dellteam.com>
 options:
   node:

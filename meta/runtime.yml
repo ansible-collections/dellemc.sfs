@@ -1,0 +1,69 @@
+requires_ansible: '>=1.0.0'
+plugin_routing:
+  action:
+    sfs_aaa:
+      redirect: dellemc.sfs.sfs
+    sfs_acl_rules:
+      redirect: dellemc.sfs.sfs
+    sfs_acl:
+      redirect: dellemc.sfs.sfs
+    sfs_acl_mapping:
+      redirect: dellemc.sfs.sfs
+    sfs_backup:
+      redirect: dellemc.sfs.sfs
+    sfs_restore:
+      redirect: dellemc.sfs.sfs
+    sfs_dns:
+      redirect: dellemc.sfs.sfs
+    sfs_fabric_handler:
+      redirect: dellemc.sfs.sfs
+    sfs_fabric_properties:
+      redirect: dellemc.sfs.sfs
+    sfs_fabric_replace:
+      redirect: dellemc.sfs.sfs
+    sfs_fabric_update:
+      redirect: dellemc.sfs.sfs
+    sfs_image_upgrades:
+      redirect: dellemc.sfs.sfs
+    sfs_network:
+      redirect: dellemc.sfs.sfs
+    sfs_node_policy_mapping:
+      redirect: dellemc.sfs.sfs
+    sfs_nodes:
+      redirect: dellemc.sfs.sfs
+    sfs_ntp:
+      redirect: dellemc.sfs.sfs
+    sfs_port_breakout:
+      redirect: dellemc.sfs.sfs
+    sfs_port_properties:
+      redirect: dellemc.sfs.sfs
+    sfs_preferred_master:
+      redirect: dellemc.sfs.sfs
+    sfs_prefix_list_rules:
+      redirect: dellemc.sfs.sfs
+    sfs_prefix_list:
+      redirect: dellemc.sfs.sfs
+    sfs_rest:
+      redirect: dellemc.sfs.sfs
+    sfs_route_policy:
+      redirect: dellemc.sfs.sfs
+    sfs_route_maps:
+      redirect: dellemc.sfs.sfs
+    sfs_server_profile:
+      redirect: dellemc.sfs.sfs
+    sfs_port_properties:
+      redirect: dellemc.sfs.sfs
+    sfs_server_interface_profile:
+      redirect: dellemc.sfs.sfs
+    sfs_setup:
+      redirect: dellemc.sfs.sfs
+    sfs_snmp:
+      redirect: dellemc.sfs.sfs
+    sfs_syslog:
+      redirect: dellemc.sfs.sfs
+    sfs_uplink:
+      redirect: dellemc.sfs.sfs
+    sfs_validation_errors:
+      redirect: dellemc.sfs.sfs
+    sfs_virtual_network:
+      redirect: dellemc.sfs.sfs

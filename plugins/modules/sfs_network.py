@@ -277,7 +277,7 @@ class SFSNetwork(SFSConfig):
                 'required': False
             },
             'rack_settings': {
-                'type': 'str',
+                'type': 'list',
                 'required': False
             },
             'rack_id': {
