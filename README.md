@@ -14,37 +14,36 @@ Plugins
 
 Name | Description
 ---- | -----------
-[httpapi]()|Use Ansible HTTPAPI to run commands on Dell EMC SmartFabric Services
+httpapi|Use Ansible HTTPAPI to run commands on Dell EMC SmartFabric Services
 
 Collection core modules
 ------------------------
 Name | Description | Connection type
 ---- | ----------- | ---------------
-[**sfs_setup**]()|Manage configuration of L3 Fabric setup|ansible.netcommon.httpapi
-[**sfs_port_breakout**]()|Manage port breakout configuration|ansible.netcommon.httpapi
-[**sfs_port_properties**]()|Manage port properties configuration|ansible.netcommon.httpapi
-[**sfs_fabric_properties**]()|Manage L3 Fabric properties configuration|ansible.netcommon.httpapi
-[**sfs_network**]()|Manage network configuration|ansible.netcommon.httpapi
-[**sfs_uplink**]()|Manage uplink configuration|ansible.netcommon.httpapi
-[**sfs_virtual_network**]()|Manage virtual network configuration|ansible.netcommon.httpapi
-[**sfs_server_profile**]()|Manage server profile configuration|ansible.netcommon.httpapi
-[**sfs_server_interface_profile**]()|Manage server interface profile configuration|ansible.netcommon.httpapi
-[**sfs_aaa**]()|Manage authentication, authorization and accounting configuration|ansible.netcommon.httpapi
-[**sfs_acl**]()|Manage Access control list configuration|ansible.netcommon.httpapi
-[**sfs_dns**]()|Manage DNS configuration|ansible.netcommon.httpapi
-[**sfs_ntp**]()|Manage NTP configuration|ansible.netcommon.httpapi
-[**sfs_route_policy**]()|Manage route policy configuration|ansible.netcommon.httpapi
-[**sfs_node_policy_mapping**]()|Manage node policy configuration|ansible.netcommon.httpapi
-[**sfs_preferred_master**]()|Manage preferred master configuration|ansible.netcommon.httpapi
-[**sfs_prefix_list**]()|Manage prefix list configuration|ansible.netcommon.httpapi
-[**sfs_snmp**]()|Manage SNMP configuration|ansible.netcommon.httpapi
-[**sfs_syslog**]()|Manage syslog configuration|ansible.netcommon.httpapi
-[**sfs_validation_errors**]()|Get validation errors in L3 fabric|ansible.netcommon.httpapi
-[**sfs_backup_restore**]()|Manage backup restore configuration|ansible.netcommon.httpapi
-[**sfs_nodes**]()|Manage nodes configuration|ansible.netcommon.httpapi
-[**sfs_VSAN_stretched_cluster**]()|Manage VSAN stretched cluster configuration|ansible.netcommon.httpapi
-[**sfs_fabric_handler**]()|Manage fabric handler configuration|ansible.netcommon.httpapi
-[**sfs_rest**]()|Manage rest configuration|ansible.netcommon.httpapi
+[**sfs_setup**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_setup.md)|Manage configuration of L3 Fabric setup|ansible.netcommon.httpapi
+[**sfs_port_breakout**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_port_breakout.md)|Manage port breakout configuration|ansible.netcommon.httpapi
+[**sfs_port_properties**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_port_properties.md)|Manage port properties configuration|ansible.netcommon.httpapi
+[**sfs_fabric_properties**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_fabric_properties.md)|Manage L3 Fabric properties configuration|ansible.netcommon.httpapi
+[**sfs_network**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_network.md)|Manage network configuration|ansible.netcommon.httpapi
+[**sfs_uplink**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_uplink.md)|Manage uplink configuration|ansible.netcommon.httpapi
+[**sfs_virtual_network**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_virtual_network.md)|Manage virtual network configuration|ansible.netcommon.httpapi
+[**sfs_server_profile**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_server_profile.md)|Manage server profile configuration|ansible.netcommon.httpapi
+[**sfs_server_interface_profile**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_server_profile.md)|Manage server interface profile configuration|ansible.netcommon.httpapi
+[**sfs_aaa**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_aaa.md)|Manage authentication, authorization and accounting configuration|ansible.netcommon.httpapi
+[**sfs_acl**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_acl.md)|Manage Access control list configuration|ansible.netcommon.httpapi
+[**sfs_dns**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_dns.md)|Manage DNS configuration|ansible.netcommon.httpapi
+[**sfs_ntp**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_ntp.md)|Manage NTP configuration|ansible.netcommon.httpapi
+[**sfs_route_policy**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_route_policy.md)|Manage route policy configuration|ansible.netcommon.httpapi
+[**sfs_node_policy_mapping**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_node_policy_mapping.md)|Manage node policy configuration|ansible.netcommon.httpapi
+[**sfs_preferred_master**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_preferred_master.md)|Manage preferred master configuration|ansible.netcommon.httpapi
+[**sfs_prefix_list**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_prefix_list.md)|Manage prefix list configuration|ansible.netcommon.httpapi
+[**sfs_snmp**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_snmp.md)|Manage SNMP configuration|ansible.netcommon.httpapi
+[**sfs_syslog**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_syslog.md)|Manage syslog configuration|ansible.netcommon.httpapi
+[**sfs_validation_errors**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_validation_errors.md)|Get validation errors in L3 fabric|ansible.netcommon.httpapi
+[**sfs_backup_restore**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_backup_restore.md)|Manage backup restore configuration|ansible.netcommon.httpapi
+[**sfs_nodes**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_nodes.md)|Manage nodes configuration|ansible.netcommon.httpapi
+[**sfs_fabric_handler**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_fabric_handler.md)|Manage fabric handler configuration|ansible.netcommon.httpapi
+[**sfs_rest**](https://github.com/ansible-collections/dellemc.sfs/blob/main/docs/sfs_rest.md)|Manage rest configuration|ansible.netcommon.httpapi
 
 Installation
 ------------
