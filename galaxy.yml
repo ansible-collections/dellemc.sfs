@@ -10,7 +10,7 @@ name: sfs
 namespace: dellemc
 readme: README.md
 tags: [dell, dellemc, emc, networking, sfs]
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/ansible-collections/dellemc.sfs
 homepage: https://github.com/ansible-collections/dellemc.sfs
 issues: https://github.com/ansible-collections/dellemc.sfs/issues
